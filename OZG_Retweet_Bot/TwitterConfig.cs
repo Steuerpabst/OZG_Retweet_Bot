@@ -40,7 +40,28 @@ namespace OZG_Retweet_Bot
 
 		public string[]? TermsNotToRetweet => _termsNotToRetweet == "" ? null : _termsNotToRetweet.Split(",");
 
-		public string[]? UsersToRetweet => _usersToRetweet == "" ? null : _usersToRetweet.Split(",");
+		public long[]? UsersToRetweet
+    {
+			get
+      {
+				if (_usersToRetweet == "")
+        {
+					return null;
+        }
+        else
+        {
+					string[] usersToRetweet = _usersToRetweet.Split(",");
+
+					long[] usersToRetweetID = new long[usersToRetweet.Length];
+
+					for (int i = 0; i < usersToRetweet.Length; i++)
+          {
+						usersToRetweetID[i] = Convert.ToInt64(usersToRetweet[i]);
+          }
+					return usersToRetweetID;
+        }
+      }
+    }
 
 		public string[]? UsersNotToRetweet => _usersNotToRetweet == "" ? null : _usersNotToRetweet.Split(",");
 

@@ -43,6 +43,14 @@ namespace OZG_Retweet_Bot
         }
       }
 
+      if (_twitterConfig.UsersToRetweet != null)
+      {
+        foreach (long users in _twitterConfig.UsersToRetweet)
+        {
+          _filteredStream.AddFollow(users);
+        }
+      }
+
       return Task.CompletedTask;
     }
 
@@ -125,6 +133,14 @@ namespace OZG_Retweet_Bot
       }
 
       ITweet tweet = receivedEventArgs.Tweet;
+
+      for (int i = 0; i < config.UsersToRetweet.Length; i++)
+      {
+        if (tweet.CreatedBy.Id == config.UsersToRetweet[i])
+        {
+          return true;
+        }
+      }
 
       for (int i = 0; i < config.TermsToRetweet.Length; i++)
       {
