@@ -136,7 +136,7 @@ namespace OZG_Retweet_Bot
 
       for (int i = 0; i < config.UsersToRetweet.Length; i++)
       {
-        if (tweet.CreatedBy.Id == config.UsersToRetweet[i])
+        if ((!tweet.IsRetweet) && (tweet.CreatedBy.Id == config.UsersToRetweet[i]))
         {
           return true;
         }
