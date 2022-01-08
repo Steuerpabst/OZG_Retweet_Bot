@@ -2,6 +2,7 @@
 using Tweetinvi;
 using Tweetinvi.Events;
 using Tweetinvi.Models;
+using Tweetinvi.Parameters;
 using Tweetinvi.Streaming;
 using Tweetinvi.Streaming.Events;
 
