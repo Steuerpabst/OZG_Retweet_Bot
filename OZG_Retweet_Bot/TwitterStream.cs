@@ -99,12 +99,14 @@ namespace OZG_Retweet_Bot
       while (true);
     }
 
+
     #endregion
 
     #region Methods
 
     private async void OnTweetReceived(object? sender, MatchedTweetReceivedEventArgs receivedEventArgs)
     {
+
       if (CheckTweetForRetweet(receivedEventArgs))
       {
         try
