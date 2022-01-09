@@ -27,7 +27,6 @@
 
     public TweetToRetweet()
     {
-
     }
 
     #endregion
@@ -42,7 +41,7 @@
 
     public string? TweetText
     {
-      get { return _tweetText; }    // Zeilenumbrüche eliminieren
+      get { return _tweetText; }
       set { _tweetText = value; }
     }
 

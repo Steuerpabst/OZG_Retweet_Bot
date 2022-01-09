@@ -36,9 +36,9 @@ namespace OZG_Retweet_Bot
 		public string? AccessToken => _accessToken;
 		public string? AccessTokenSecret => _accessTokenSecret;
 
-		public string[]? TermsToRetweet => _termsToRetweet == "" ? null : _termsToRetweet.Split(",");
+		public string[]? TermsToRetweet => _termsToRetweet == "" ? null : _termsToRetweet!.Split(",");
 
-		public string[]? TermsNotToRetweet => _termsNotToRetweet == "" ? null : _termsNotToRetweet.Split(",");
+		public string[]? TermsNotToRetweet => _termsNotToRetweet == "" ? null : _termsNotToRetweet!.Split(",");
 
 		public long[]? UsersToRetweet
     {
@@ -50,7 +50,7 @@ namespace OZG_Retweet_Bot
         }
         else
         {
-					string[] usersToRetweet = _usersToRetweet.Split(",");
+					string[] usersToRetweet = _usersToRetweet!.Split(",");
 
 					long[] usersToRetweetID = new long[usersToRetweet.Length];
 
@@ -63,11 +63,11 @@ namespace OZG_Retweet_Bot
       }
     }
 
-		public string[]? UsersNotToRetweet => _usersNotToRetweet == "" ? null : _usersNotToRetweet.Split(",");
+		public string[]? UsersNotToRetweet => _usersNotToRetweet == "" ? null : _usersNotToRetweet!.Split(",");
 
-		public string[]? LangsToRetweet => _languagesToRetweet == "" ? null : _languagesToRetweet.Split(",");
+		public string[]? LangsToRetweet => _languagesToRetweet == "" ? null : _languagesToRetweet!.Split(",");
 
-		public string[]? LangsNotToRetweet => _languagesNotToRetweet == "" ? null : _languagesNotToRetweet.Split(",");
+		public string[]? LangsNotToRetweet => _languagesNotToRetweet == "" ? null : _languagesNotToRetweet!.Split(",");
 
 		#endregion
 	}

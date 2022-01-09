@@ -34,6 +34,8 @@ namespace OZG_Retweet_Bot
 
     private Point _innerTemplate = new Point(60, 60);
 
+    private static readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
     #endregion
 
     #region Constructor
@@ -117,7 +119,7 @@ namespace OZG_Retweet_Bot
     }
 
     // Thanks for inspiration to: VR Speedruns (https://github.com/VRSpeedruns/Twitter/blob/master/Twitter/Entities/Run.cs)
-    public byte[] DrawToImage()
+    public byte[]? DrawToImage(int value)
     {
       Image dummyImage = new Bitmap(1, 1);
 
@@ -157,11 +159,20 @@ namespace OZG_Retweet_Bot
 
       MemoryStream mStream = new MemoryStream();
 
-      template.Save(mStream, ImageFormat.Png);
+      try
+      {
+        template.Save(mStream, ImageFormat.Png);
+        template.Save(_baseDirectory + "\\" + value + "_tweet.png", ImageFormat.Png);
 
-      template.Dispose();
+        template.Dispose();
 
-      return mStream.ToArray();
+        return mStream.ToArray();
+      }
+      catch (Exception ex)
+      {
+        LogWriter.WriteToLog(ex, Log.LogLevel.ERROR);
+        return null;
+      }
     }
 
     #endregion

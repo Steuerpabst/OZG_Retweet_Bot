@@ -5,16 +5,15 @@ namespace OZG_Retweet_Bot
   static class Program
   {
     [SupportedOSPlatform("windows")]
-    public static async Task Main()
+    public async static Task Main()
     {
       _ = LogWriter.GetInstance;
-      
-      TwitterStream twitterStream = new TwitterStream();
-      DailyTweet dailyTweet = new DailyTweet();
+      _ = DailyTweet.GetInstance;
 
+      TwitterStream twitterStream = new TwitterStream();
+     
       await twitterStream.Initialize();
       await twitterStream.StartTwitterStream();
-      //await dailyTweet.TweetDaily();
     }
   }
 }

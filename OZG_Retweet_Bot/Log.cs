@@ -4,7 +4,7 @@
   {
     #region Attributes
 
-    private DateTime _logTime;
+    private readonly DateTime _logTime;
     private string? _logMessage;
     private TweetToRetweet? _logTweet;
 

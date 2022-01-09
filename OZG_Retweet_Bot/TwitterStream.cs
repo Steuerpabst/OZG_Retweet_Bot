@@ -2,7 +2,6 @@
 using Tweetinvi;
 using Tweetinvi.Events;
 using Tweetinvi.Models;
-using Tweetinvi.Parameters;
 using Tweetinvi.Streaming;
 using Tweetinvi.Streaming.Events;
 
@@ -14,7 +13,7 @@ namespace OZG_Retweet_Bot
     #region Attributes
 
     private IFilteredStream _filteredStream;
-    private ITwitterClient _twitterClient;
+    private readonly ITwitterClient _twitterClient;
     private readonly TwitterConfig _twitterConfig;
 
     #endregion
@@ -24,6 +23,8 @@ namespace OZG_Retweet_Bot
     public TwitterStream()
     {
       _twitterConfig = new TwitterConfig();
+      _twitterClient = new TwitterClient(_twitterConfig.ConsumerKey, _twitterConfig.ConsumerKeySecret, _twitterConfig.AccessToken, _twitterConfig.AccessTokenSecret);
+      _filteredStream = _twitterClient.Streams.CreateFilteredStream();
     }
 
     #endregion
@@ -32,8 +33,6 @@ namespace OZG_Retweet_Bot
 
     public Task Initialize()
     {
-      _twitterClient = new TwitterClient(_twitterConfig.ConsumerKey, _twitterConfig.ConsumerKeySecret, _twitterConfig.AccessToken, _twitterConfig.AccessTokenSecret);
-
       _filteredStream = _twitterClient.Streams.CreateFilteredStream();
 
       if (_twitterConfig.TermsToRetweet != null)
@@ -137,7 +136,7 @@ namespace OZG_Retweet_Bot
 
       ITweet tweet = receivedEventArgs.Tweet;
 
-      for (int i = 0; i < config.UsersToRetweet.Length; i++)
+      for (int i = 0; i < config.UsersToRetweet!.Length; i++)
       {
         if ((!tweet.IsRetweet) && (tweet.CreatedBy.Id == config.UsersToRetweet[i]))
         {
@@ -145,7 +144,7 @@ namespace OZG_Retweet_Bot
         }
       }
 
-      for (int i = 0; i < config.TermsToRetweet.Length; i++)
+      for (int i = 0; i < config.TermsToRetweet!.Length; i++)
       {
         if (receivedHashtags.Contains(config.TermsToRetweet[i]))
         {

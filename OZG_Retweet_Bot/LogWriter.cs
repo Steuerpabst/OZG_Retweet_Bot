@@ -12,7 +12,7 @@ namespace OZG_Retweet_Bot
 
     private static LogWriter? Instance;
 
-    private static Queue<Log> _logQueue;
+    private static Queue<Log>? _logQueue;
 
     private static readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -156,7 +156,7 @@ namespace OZG_Retweet_Bot
 
     public static void WriteToLog(string message, LogLevel level)
     {
-      lock (_logQueue)
+      lock (_logQueue!)
       {
         // Create log
         Log log = new Log(message, level);
@@ -172,7 +172,7 @@ namespace OZG_Retweet_Bot
 
     public static void WriteToLog(Exception exc, LogLevel level)
     {
-      lock (_logQueue)
+      lock (_logQueue!)
       {
         // Create log
         Log msg = new Log(exc.Message.ToString().Trim(), level);
@@ -188,7 +188,7 @@ namespace OZG_Retweet_Bot
 
     public static void WriteToLog(ITweet tweet, LogLevel level)
     {
-      lock (_logQueue)
+      lock (_logQueue!)
       {
         // Create log       
         TweetToRetweet tweetToRetweet = new TweetToRetweet();
@@ -232,7 +232,7 @@ namespace OZG_Retweet_Bot
     {
       var myInstance = new LogWriter();
 
-      while (_logQueue.Count > 0)
+      while (_logQueue!.Count > 0)
       {
         // get entry to log
         Log entry = _logQueue.Dequeue();
@@ -309,7 +309,7 @@ namespace OZG_Retweet_Bot
         message += entry.LogTweet.TweetUserTweets.ToString() + "\t";
         message += entry.LogTweet.TweetUserVerified.ToString();
 
-        for (int i = 0; i < entry.LogTweet.TweetHashtags.Count; i++)
+        for (int i = 0; i < entry.LogTweet.TweetHashtags!.Count; i++)
         {
           message += "\t" + entry.LogTweet.TweetHashtags[i].ToLower();
         }
