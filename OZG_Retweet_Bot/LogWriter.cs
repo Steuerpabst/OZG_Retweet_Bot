@@ -159,7 +159,7 @@ namespace OZG_Retweet_Bot
       lock (_logQueue!)
       {
         // Create log
-        Log log = new Log(message, level);
+        Log log = new(message, level);
         _logQueue.Enqueue(log);
 
         // Check if should flush
@@ -175,7 +175,7 @@ namespace OZG_Retweet_Bot
       lock (_logQueue!)
       {
         // Create log
-        Log msg = new Log(exc.Message.ToString().Trim(), level);
+        Log msg = new(exc.Message.ToString().Trim(), level);
         _logQueue.Enqueue(msg);
 
         // Check if should flush
@@ -191,16 +191,17 @@ namespace OZG_Retweet_Bot
       lock (_logQueue!)
       {
         // Create log       
-        TweetToRetweet tweetToRetweet = new TweetToRetweet();
+        TweetToRetweet tweetToRetweet = new()
+        {
+          TweetId = tweet.IdStr,
+          TweetText = tweet.FullText.Replace('\n', ' '),
+          TweetCreatedBy = tweet.CreatedBy.ScreenName,
+          TweetCreatedAt = tweet.CreatedAt,
+          TweetLanguage = tweet.Language.ToString(),
+          TweetHashtagCount = tweet.Hashtags.Count
+        };
 
-        tweetToRetweet.TweetId = tweet.IdStr;
-        tweetToRetweet.TweetText = tweet.FullText.Replace('\n', ' ');
-        tweetToRetweet.TweetCreatedBy = tweet.CreatedBy.ScreenName;
-        tweetToRetweet.TweetCreatedAt = tweet.CreatedAt;
-        tweetToRetweet.TweetLanguage = tweet.Language.ToString();
-        tweetToRetweet.TweetHashtagCount = tweet.Hashtags.Count;
-
-        List<string> tags = new List<string>();
+        List<string> tags = new();
         if (tweetToRetweet.TweetHashtagCount > 0)
         {
           for (int i = 0; i < tweet.Hashtags.Count; i++)
@@ -217,7 +218,7 @@ namespace OZG_Retweet_Bot
         tweetToRetweet.TweetUserTweets = tweet.CreatedBy.StatusesCount;
         tweetToRetweet.TweetUserVerified = tweet.CreatedBy.Verified;
 
-        Log tweetLog = new Log(tweetToRetweet, level);
+        Log tweetLog = new(tweetToRetweet, level);
         _logQueue.Enqueue(tweetLog);
 
         // Check if should flush

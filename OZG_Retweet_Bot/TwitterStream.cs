@@ -127,7 +127,7 @@ namespace OZG_Retweet_Bot
       int countAggregate = 0;
       var config = new TwitterConfig();
 
-      HashSet<string> receivedHashtags = new HashSet<string>();
+      HashSet<string> receivedHashtags = new();
 
       for (int i = 0; i < receivedEventArgs.MatchingTracks.Length; i++)
       {

@@ -10,7 +10,7 @@ namespace OZG_Retweet_Bot
       _ = LogWriter.GetInstance;
       _ = DailyTweet.GetInstance;
 
-      TwitterStream twitterStream = new TwitterStream();
+      TwitterStream twitterStream = new();
      
       await twitterStream.Initialize();
       await twitterStream.StartTwitterStream();

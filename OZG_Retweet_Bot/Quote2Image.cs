@@ -29,10 +29,10 @@ namespace OZG_Retweet_Bot
 
     private int _fontSize;
 
-    private readonly SolidBrush _brushText = new SolidBrush(Color.FromArgb(0, 29, 181));
-    private readonly SolidBrush _brushAuthor = new SolidBrush(Color.FromArgb(1, 23, 141));
+    private readonly SolidBrush _brushText = new(Color.FromArgb(0, 29, 181));
+    private readonly SolidBrush _brushAuthor = new(Color.FromArgb(1, 23, 141));
 
-    private Point _innerTemplate = new Point(60, 60);
+    private Point _innerTemplate = new(60, 60);
 
     private static readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -90,21 +90,23 @@ namespace OZG_Retweet_Bot
     }
 
     // Thanks to: Gary Kindel (https://stackoverflow.com/a/15449620)
-    private Bitmap Template()
+    private static Bitmap Template()
     {
       Assembly assembly = Assembly.GetExecutingAssembly();
 
       string resourceName = assembly.GetName().Name + ".Properties.Resources";
 
-      ResourceManager resManager = new ResourceManager(resourceName, assembly);
+      ResourceManager resManager = new(resourceName, assembly);
 
       return (Bitmap)resManager.GetObject("template")!;
     }
 
-    private StringFormat Format(string value)
+    private static StringFormat Format(string value)
     {
-      StringFormat strFormat = new StringFormat();
-      strFormat.Trimming = StringTrimming.Word;
+      StringFormat strFormat = new()
+      {
+        Trimming = StringTrimming.Word
+      };
 
       if (value == "text")
       {
@@ -157,12 +159,12 @@ namespace OZG_Retweet_Bot
         graphics.Dispose();
       }
 
-      MemoryStream mStream = new MemoryStream();
+      MemoryStream mStream = new();
 
       try
       {
         template.Save(mStream, ImageFormat.Png);
-        template.Save(_baseDirectory + "\\" + value + "_tweet.png", ImageFormat.Png);
+        //template.Save(_baseDirectory + "\\" + value + "_tweet.png", ImageFormat.Png);
 
         template.Dispose();
 

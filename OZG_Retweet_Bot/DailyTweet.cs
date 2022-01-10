@@ -51,7 +51,7 @@ namespace OZG_Retweet_Bot
           Assembly assembly = Assembly.GetExecutingAssembly();
 
           string resourceName = assembly.GetName().Name + ".Properties.Resources";
-          ResourceManager resource = new ResourceManager(resourceName, assembly);
+          ResourceManager resource = new(resourceName, assembly);
 
           _quotes = ((string)resource.GetObject("quotes")!).Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         }
@@ -76,13 +76,13 @@ namespace OZG_Retweet_Bot
     
     public async Task TweetDaily()
     {
-      Random random = new Random();
+      Random random = new();
 
       int randomQuote = random.Next(0, _quotes!.Length);
 
       string[] dailyQuote = _quotes[randomQuote].Split("|");
 
-      Quote2Image quote2Image = new Quote2Image(dailyQuote[0], dailyQuote[1]);
+      Quote2Image quote2Image = new(dailyQuote[0], dailyQuote[1]);
 
       byte[] tweetPic = quote2Image.DrawToImage(randomQuote)!;
 
@@ -93,7 +93,7 @@ namespace OZG_Retweet_Bot
         try
         {
 
-          LogWriter.WriteToLog("Zitat " + randomQuote + " gesendet", Log.LogLevel.INFO);
+          LogWriter.WriteToLog("Zitat " + randomQuote + " gesendet, " + motivationText, Log.LogLevel.INFO);
           
           IMedia uploadedImage = await _twitterClient!.Upload.UploadTweetImageAsync(tweetPic);
 
@@ -110,7 +110,7 @@ namespace OZG_Retweet_Bot
       }
       else
       {
-        LogWriter.WriteToLog("Es wurde kein Pictures übergeben!", Log.LogLevel.ERROR);
+        LogWriter.WriteToLog("Es wurde kein Picture übergeben!", Log.LogLevel.ERROR);
       }
     }
 
