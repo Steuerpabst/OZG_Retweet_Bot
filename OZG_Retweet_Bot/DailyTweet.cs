@@ -21,7 +21,8 @@ namespace OZG_Retweet_Bot
 
     private static string[]? _quotes;
 
-    private readonly PeriodicTimer _timer;
+    private System.Timers.Timer _startTimer;
+    private PeriodicTimer _timer;
 
     #endregion
 
@@ -34,9 +35,22 @@ namespace OZG_Retweet_Bot
 
       _dateTime = DateTime.Now;
 
-      _timer = new PeriodicTimer(TimeSpan.FromHours(24));
+      TimeSpan day = new TimeSpan(24, 0, 0);
+      TimeSpan now = TimeSpan.Parse(_dateTime.ToString("HH:mm"));
+      TimeSpan fireEvent = new TimeSpan(9, 00, 0);
 
-      _ = WaitingTask();
+      TimeSpan timeLeftUntilFirstRun =(day - now + fireEvent);
+
+      if(timeLeftUntilFirstRun.TotalHours > 24)
+      {
+        timeLeftUntilFirstRun -= new TimeSpan(24, 0, 0);
+      }
+
+      _startTimer = new System.Timers.Timer();
+      _startTimer.Interval = timeLeftUntilFirstRun.TotalMilliseconds;
+      _startTimer.Elapsed += OnTimeEvent;
+      _startTimer.Start();
+
     }
 
     public static DailyTweet GetInstance
@@ -86,7 +100,7 @@ namespace OZG_Retweet_Bot
 
       byte[] tweetPic = quote2Image.DrawToImage(randomQuote)!;
 
-      string motivationText = "#" + _dateTime.DayOfWeek + "Motivation";
+      string motivationText = "#" + DateTime.Now.DayOfWeek + "Motivation";
 
       if (tweetPic != null)
       {
@@ -112,6 +126,21 @@ namespace OZG_Retweet_Bot
       {
         LogWriter.WriteToLog("Es wurde kein Picture übergeben!", Log.LogLevel.ERROR);
       }
+    }
+
+    #endregion
+
+    #region Methods
+
+    private async void OnTimeEvent(object? source, System.Timers.ElapsedEventArgs eventArgs)
+    {
+      await TweetDaily();
+
+      _startTimer.Stop();
+
+      _timer = new PeriodicTimer(TimeSpan.FromMinutes(15)) ;
+
+      _ = WaitingTask();
     }
 
     #endregion
