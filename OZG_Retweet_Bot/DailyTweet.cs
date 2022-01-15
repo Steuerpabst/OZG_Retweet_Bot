@@ -22,7 +22,7 @@ namespace OZG_Retweet_Bot
     private static string[]? _quotes;
 
     private System.Timers.Timer _startTimer;
-    private PeriodicTimer _timer;
+    private PeriodicTimer? _timer;
 
     #endregion
 
@@ -50,7 +50,6 @@ namespace OZG_Retweet_Bot
       _startTimer.Interval = timeLeftUntilFirstRun.TotalMilliseconds;
       _startTimer.Elapsed += OnTimeEvent;
       _startTimer.Start();
-
     }
 
     public static DailyTweet GetInstance
@@ -81,7 +80,7 @@ namespace OZG_Retweet_Bot
     // Thanks to: İLKAY İLKNUR (https://www.ilkayilknur.com/a-new-modern-timer-api-in-dotnet-6-periodictimer)
     private async Task WaitingTask()
     {
-      while(await _timer.WaitForNextTickAsync())
+      while(await _timer!.WaitForNextTickAsync())
       {
         await TweetDaily();
       }
@@ -138,7 +137,7 @@ namespace OZG_Retweet_Bot
 
       _startTimer.Stop();
 
-      _timer = new PeriodicTimer(TimeSpan.FromMinutes(15)) ;
+      _timer = new PeriodicTimer(TimeSpan.FromHours(24)) ;
 
       _ = WaitingTask();
     }
