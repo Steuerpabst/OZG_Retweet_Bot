@@ -121,13 +121,34 @@
   <data name="Caveat_SemiBold" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Caveat-SemiBold.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Friday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Folie6.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Monday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Folie2.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="OZG_Retweet_Bot_256" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OZG_Retweet_Bot_256.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="quotes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\quotes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="Saturday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Folie7.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sunday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Folie8.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\template.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thursday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Folie5.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tuesday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Folie3.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Wednesday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Folie4.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

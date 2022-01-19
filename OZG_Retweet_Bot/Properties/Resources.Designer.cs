@@ -71,6 +71,26 @@ namespace OZG_Retweet_Bot.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Friday {
+            get {
+                object obj = ResourceManager.GetObject("Friday", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Monday {
+            get {
+                object obj = ResourceManager.GetObject("Monday", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
         internal static System.Drawing.Icon OZG_Retweet_Bot_256 {
@@ -81,10 +101,11 @@ namespace OZG_Retweet_Bot.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Deine Marke ist, was andere Leute über Dich sagen, wenn Du nicht im Raum bist.|Jeff Bezos
-        ///Es gibt zwei Arten von Unternehmen, die die dafür arbeiten mehr von ihren Kunden verlangen zu können, und die, die versuchen für weniger zu arbeiten. Eine Art wird verlieren.|Jeff Bezos
+        ///   Sucht eine lokalisierte Zeichenfolge, die Das Schönste, was wir erleben können, ist das Geheimnisvolle.|Albert Einstein
         ///Das, wobei unsere Berechnungen versagen, nennen wir Zufall.|Albert Einstein
-        ///Eine Marke ist für ein Unternehmen so etwas wie der Ruf für eine Person. Einen guten Ruf verdient man sich, indem man hart arbeitet und seine Sache gut macht [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///Der gesunde Menschenverstand ist nur eine Anhäufung von Vorurteilen, die man bis zum 18. Lebensjahr erworben hat.|Albert Einstein
+        ///Der Sinn des Lebens besteht nicht darin ein erfolgreicher Mensch zu sein, sondern ein wertvoller.|Albert Einstein
+        ///Die reinste Form des Wahnsinns ist es, alles beim Alten zu lassen und gleichzeitig zu hoffen, dass sich etwas  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string quotes {
             get {
@@ -95,9 +116,59 @@ namespace OZG_Retweet_Bot.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Saturday {
+            get {
+                object obj = ResourceManager.GetObject("Saturday", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sunday {
+            get {
+                object obj = ResourceManager.GetObject("Sunday", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap template {
             get {
                 object obj = ResourceManager.GetObject("template", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Thursday {
+            get {
+                object obj = ResourceManager.GetObject("Thursday", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tuesday {
+            get {
+                object obj = ResourceManager.GetObject("Tuesday", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Wednesday {
+            get {
+                object obj = ResourceManager.GetObject("Wednesday", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

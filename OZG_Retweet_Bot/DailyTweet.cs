@@ -18,10 +18,11 @@ namespace OZG_Retweet_Bot
     private readonly TwitterConfig? _twitterConfig;
 
     private readonly DateTime _dateTime;
+    private DateTime _dailyPicTime;
 
     private static string[]? _quotes;
 
-    private System.Timers.Timer _startTimer;
+    private readonly System.Timers.Timer _startTimer;
     private PeriodicTimer? _timer;
 
     #endregion
@@ -35,9 +36,9 @@ namespace OZG_Retweet_Bot
 
       _dateTime = DateTime.Now;
 
-      TimeSpan day = new TimeSpan(24, 0, 0);
+      TimeSpan day = new(24, 0, 0);
       TimeSpan now = TimeSpan.Parse(_dateTime.ToString("HH:mm"));
-      TimeSpan fireEvent = new TimeSpan(9, 00, 0);
+      TimeSpan fireEvent = new(9, 00, 0);
 
       TimeSpan timeLeftUntilFirstRun =(day - now + fireEvent);
 
@@ -46,8 +47,10 @@ namespace OZG_Retweet_Bot
         timeLeftUntilFirstRun -= new TimeSpan(24, 0, 0);
       }
 
-      _startTimer = new System.Timers.Timer();
-      _startTimer.Interval = timeLeftUntilFirstRun.TotalMilliseconds;
+      _startTimer = new System.Timers.Timer
+      {
+        Interval = timeLeftUntilFirstRun.TotalMilliseconds
+      };
       _startTimer.Elapsed += OnTimeEvent;
       _startTimer.Start();
     }
@@ -86,9 +89,10 @@ namespace OZG_Retweet_Bot
       }
     }
     
-    
     public async Task TweetDaily()
     {
+      _dailyPicTime = DateTime.Now;
+
       Random random = new();
 
       int randomQuote = random.Next(0, _quotes!.Length);
@@ -97,7 +101,7 @@ namespace OZG_Retweet_Bot
 
       Quote2Image quote2Image = new(dailyQuote[0], dailyQuote[1]);
 
-      byte[] tweetPic = quote2Image.DrawToImage(randomQuote)!;
+      byte[] tweetPic = quote2Image.DrawToImage(_dailyPicTime.DayOfWeek)!;
 
       string motivationText = "#" + DateTime.Now.DayOfWeek + "Motivation";
 
@@ -137,7 +141,7 @@ namespace OZG_Retweet_Bot
 
       _startTimer.Stop();
 
-      _timer = new PeriodicTimer(TimeSpan.FromHours(24)) ;
+      _timer = new PeriodicTimer(TimeSpan.FromHours(24));
 
       _ = WaitingTask();
     }

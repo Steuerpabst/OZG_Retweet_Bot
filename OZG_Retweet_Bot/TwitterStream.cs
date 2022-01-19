@@ -144,6 +144,18 @@ namespace OZG_Retweet_Bot
         }
       }
 
+      for (int i = 0; i < tweet.Hashtags.Count; i++)
+      {
+        for (int j = 0; j < config.TermsNotToRetweet!.Length; j++)
+        {
+          if (tweet.Hashtags[i].ToString()!.ToLower() == config.TermsNotToRetweet[j])
+          {
+            LogWriter.WriteToLog("Der Tweet mit dem Hashtag " + config.TermsNotToRetweet[j] + " wurde abgelehnt!", Log.LogLevel.INFO);
+            return false;
+          }
+        }
+      }
+
       for (int i = 0; i < config.TermsToRetweet!.Length; i++)
       {
         if (receivedHashtags.Contains(config.TermsToRetweet[i]))

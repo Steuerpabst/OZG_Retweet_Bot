@@ -29,12 +29,27 @@ namespace OZG_Retweet_Bot
 
     private int _fontSize;
 
-    private readonly SolidBrush _brushText = new(Color.FromArgb(0, 29, 181));
-    private readonly SolidBrush _brushAuthor = new(Color.FromArgb(1, 23, 141));
+    private readonly Tuple<SolidBrush, SolidBrush>[] _brushes =
+    {
+      // Sunday
+      new Tuple<SolidBrush, SolidBrush>(new SolidBrush(Color.FromArgb(95, 95, 95)), new SolidBrush(Color.FromArgb(126, 126, 126))),
+      // Monday
+      new Tuple<SolidBrush, SolidBrush>(new SolidBrush(Color.FromArgb(255, 196, 19)), new SolidBrush(Color.FromArgb(255, 154, 19))),
+      // Tuesday
+      new Tuple<SolidBrush, SolidBrush>(new SolidBrush(Color.FromArgb(11, 117, 132)), new SolidBrush(Color.FromArgb(2, 129, 24))),
+      // Wednesday
+      new Tuple<SolidBrush, SolidBrush>(new SolidBrush(Color.FromArgb(158, 40, 167)), new SolidBrush(Color.FromArgb(101, 52, 173))),
+      // Thursday
+      new Tuple<SolidBrush, SolidBrush>(new SolidBrush(Color.FromArgb(147, 234, 48)), new SolidBrush(Color.FromArgb(226, 250, 51))),
+      // Friday
+      new Tuple<SolidBrush, SolidBrush>(new SolidBrush(Color.FromArgb(255, 198, 149)), new SolidBrush(Color.FromArgb(222, 100, 97))),
+      // Saturday
+      new Tuple<SolidBrush, SolidBrush>(new SolidBrush(Color.FromArgb(255, 170, 0)), new SolidBrush(Color.FromArgb(255, 116, 0)))
+    };
 
     private Point _innerTemplate = new(60, 60);
 
-    private static readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+    //private static readonly string _baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
     #endregion
 
@@ -90,7 +105,7 @@ namespace OZG_Retweet_Bot
     }
 
     // Thanks to: Gary Kindel (https://stackoverflow.com/a/15449620)
-    private static Bitmap Template()
+    private static Bitmap Template(string dayOfWeek)
     {
       Assembly assembly = Assembly.GetExecutingAssembly();
 
@@ -98,7 +113,7 @@ namespace OZG_Retweet_Bot
 
       ResourceManager resManager = new(resourceName, assembly);
 
-      return (Bitmap)resManager.GetObject("template")!;
+      return (Bitmap)resManager.GetObject(dayOfWeek)!;
     }
 
     private static StringFormat Format(string value)
@@ -121,8 +136,10 @@ namespace OZG_Retweet_Bot
     }
 
     // Thanks for inspiration to: VR Speedruns (https://github.com/VRSpeedruns/Twitter/blob/master/Twitter/Entities/Run.cs)
-    public byte[]? DrawToImage(int value)
+    public byte[]? DrawToImage(DayOfWeek dayOfWeek)
     {
+      int dayNumber = (int)dayOfWeek;
+
       Image dummyImage = new Bitmap(1, 1);
 
       Graphics textGraphics = Graphics.FromImage(dummyImage);
@@ -141,7 +158,7 @@ namespace OZG_Retweet_Bot
       float textYCorner = (_maxHeightText - textSize.Height) / 2 + _innerTemplate.Y;
       float authorYCorner = textYCorner + textSize.Height + 75;
 
-      Bitmap template = Template();
+      Bitmap template = Template(dayOfWeek.ToString());
 
       using(Graphics graphics = Graphics.FromImage(template))
       {
@@ -151,8 +168,8 @@ namespace OZG_Retweet_Bot
         graphics.SmoothingMode = SmoothingMode.HighQuality;
         graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-        graphics.DrawString(Text, new Font(TextFontFamily, _fontSize, FontStyle.Regular), _brushText, new RectangleF(textXCorner, textYCorner, textSize.Width, textSize.Height), Format("text"));
-        graphics.DrawString(Author, new Font("Brush Script MT", 36, FontStyle.Italic), _brushAuthor, new RectangleF(575, authorYCorner, _maxWidthAuthor, _maxHeightAuthor), Format("author"));
+        graphics.DrawString(Text, new Font(TextFontFamily, _fontSize, FontStyle.Regular), _brushes[dayNumber].Item1, new RectangleF(textXCorner, textYCorner, textSize.Width, textSize.Height), Format("text"));
+        graphics.DrawString(Author, new Font("Brush Script MT", 36, FontStyle.Italic), _brushes[dayNumber].Item2, new RectangleF(575, authorYCorner, _maxWidthAuthor, _maxHeightAuthor), Format("author"));
 
         graphics.Save();
 
